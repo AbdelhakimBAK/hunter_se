@@ -4,6 +4,14 @@
 
     <xacro:include filename="$(find hunter_se_description)/urdf/lidar_3d.xacro"/>
 
+    <!-- ===================== Footprint (ground-projected root) ===================== -->
+    <link name="base_footprint"/>
+    <joint name="base_footprint_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0.2955" rpy="0 0 0"/>
+    </joint>
+
     <!-- ===================== Base ===================== -->
     <link name="base_link">
         <inertial>
@@ -193,22 +201,61 @@
         <dynamics damping="0.0" friction="0.1"/>
     </joint>
 
+    <!-- ===================== Colors (gz-sim) ===================== -->
+    <gazebo reference="base_link">
+        <visual>
+            <material>
+                <ambient>0.752941 0.752941 0.752941 1</ambient>
+                <diffuse>0.752941 0.752941 0.752941 1</diffuse>
+                <specular>0.2 0.2 0.2 1</specular>
+            </material>
+        </visual>
+    </gazebo>
+
     <!-- ===================== Wheel surface friction ===================== -->
     <gazebo reference="fr_left_link">
         <mu1>0.8</mu1><mu2>0.8</mu2><kp>500000.0</kp><kd>10.0</kd>
         <minDepth>0.001</minDepth><maxVel>0.1</maxVel><fdir1>1 0 0</fdir1>
+        <visual>
+            <material>
+                <ambient>0.223529 0.223529 0.223529 1</ambient>
+                <diffuse>0.223529 0.223529 0.223529 1</diffuse>
+                <specular>0.1 0.1 0.1 1</specular>
+            </material>
+        </visual>
     </gazebo>
     <gazebo reference="fr_right_link">
         <mu1>0.8</mu1><mu2>0.8</mu2><kp>500000.0</kp><kd>10.0</kd>
         <minDepth>0.001</minDepth><maxVel>0.1</maxVel><fdir1>1 0 0</fdir1>
+        <visual>
+            <material>
+                <ambient>0.223529 0.223529 0.223529 1</ambient>
+                <diffuse>0.223529 0.223529 0.223529 1</diffuse>
+                <specular>0.1 0.1 0.1 1</specular>
+            </material>
+        </visual>
     </gazebo>
     <gazebo reference="re_left_link">
         <mu1>0.8</mu1><mu2>10</mu2><kp>500000.0</kp><kd>10.0</kd>
         <minDepth>0.001</minDepth><maxVel>0.1</maxVel><fdir1>1 0 0</fdir1>
+        <visual>
+            <material>
+                <ambient>0.223529 0.223529 0.223529 1</ambient>
+                <diffuse>0.223529 0.223529 0.223529 1</diffuse>
+                <specular>0.1 0.1 0.1 1</specular>
+            </material>
+        </visual>
     </gazebo>
     <gazebo reference="re_right_link">
         <mu1>0.8</mu1><mu2>10</mu2><kp>500000.0</kp><kd>10.0</kd>
         <minDepth>0.001</minDepth><maxVel>0.1</maxVel><fdir1>1 0 0</fdir1>
+        <visual>
+            <material>
+                <ambient>0.223529 0.223529 0.223529 1</ambient>
+                <diffuse>0.223529 0.223529 0.223529 1</diffuse>
+                <specular>0.1 0.1 0.1 1</specular>
+            </material>
+        </visual>
     </gazebo>
 
     <!-- ===================== Gazebo (gz-sim) plugins ===================== -->
@@ -242,7 +289,7 @@
 
         <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
             <odom_frame>odom</odom_frame>
-            <robot_base_frame>base_link</robot_base_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>
             <odom_publish_frequency>50</odom_publish_frequency>
             <odom_topic>odom</odom_topic>
             <tf_topic>tf</tf_topic>

@@ -34,7 +34,7 @@ def generate_launch_description():
             "-name",  "hunter_se",
             "-x", x_pose,
             "-y", y_pose,
-            "-z", "0.31",
+            "-z", "0.0145",
             "-Y", yaw_pose,
         ],
         output="screen",
