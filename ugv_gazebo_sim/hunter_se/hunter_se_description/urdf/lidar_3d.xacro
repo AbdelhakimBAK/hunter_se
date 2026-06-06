@@ -33,12 +33,15 @@
 
         <gazebo reference="velodyne_link">
             <sensor name="velodyne" type="gpu_lidar">
+                <gz_frame_id>velodyne_link</gz_frame_id>
                 <topic>hunter_se/points</topic>
                 <update_rate>10</update_rate>
                 <lidar>
                     <scan>
                         <horizontal>
-                            <samples>360</samples>
+                            <!-- <samples>360</samples> --> <!-- default: 360 x 16 = 5,760 pts -->
+                            <samples>1250</samples> <!-- denser: 1250 x 16 = 20,000 pts (closer to real Livox) -->
+
                             <resolution>1</resolution>
                             <min_angle>-3.14159</min_angle>
                             <max_angle>3.14159</max_angle>
